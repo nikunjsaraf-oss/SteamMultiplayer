@@ -10,6 +10,8 @@
 #include "PuzzlePlatform/Public/MenuSystem/MenuWidget.h"
 #include "UObject/ConstructorHelpers.h"
 
+static const FName GSession_Name = TEXT("Session - 1");
+
 UPuzzlePlatformGameInstance::UPuzzlePlatformGameInstance(const FObjectInitializer& ObjectInitializer)
 {
 	const ConstructorHelpers::FClassFinder<UUserWidget> MenuBPClass(TEXT("/Game/MenuSystem/WBP_MainMenu"));
@@ -34,6 +36,8 @@ void UPuzzlePlatformGameInstance::Init()
 		{
 			SessionInterface->OnCreateSessionCompleteDelegates.AddUObject(
 				this, &UPuzzlePlatformGameInstance::OnCreateSessionComplete);
+			SessionInterface->OnDestroySessionCompleteDelegates.AddUObject(
+				this, &UPuzzlePlatformGameInstance::OnDestroySessionComplete);
 		}
 	}
 	else
@@ -68,7 +72,7 @@ void UPuzzlePlatformGameInstance::LoadPauseMenu()
 
 void UPuzzlePlatformGameInstance::OnCreateSessionComplete(FName SessionName, bool bSuccess)
 {
-	if(!bSuccess)
+	if (!bSuccess)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Unable to create Session"));
 		return;
@@ -84,13 +88,35 @@ void UPuzzlePlatformGameInstance::OnCreateSessionComplete(FName SessionName, boo
 	World->ServerTravel("/Game/ThirdPersonCPP/Maps/ThirdPersonExampleMap?listen");
 }
 
+void UPuzzlePlatformGameInstance::OnDestroySessionComplete(FName SessionName, bool bSuccess) const
+{
+	if (bSuccess)
+	{
+		CreateSession();
+	}
+}
+
+void UPuzzlePlatformGameInstance::CreateSession() const
+{
+	if(!SessionInterface.IsValid()) return;
+	const FOnlineSessionSettings OnlineSessionSettings;
+	SessionInterface->CreateSession(0, GSession_Name, OnlineSessionSettings);
+}
+
 
 void UPuzzlePlatformGameInstance::Host()
 {
 	if (SessionInterface.IsValid())
 	{
-		const FOnlineSessionSettings OnlineSessionSettings;
-		SessionInterface->CreateSession(0, TEXT("Session - 1"), OnlineSessionSettings);
+		FNamedOnlineSession* ExistingSession = SessionInterface->GetNamedSession(GSession_Name);
+		if (ExistingSession != nullptr)
+		{
+			SessionInterface->DestroySession(GSession_Name);
+		}
+		else
+		{
+			CreateSession();
+		}
 	}
 }
 
