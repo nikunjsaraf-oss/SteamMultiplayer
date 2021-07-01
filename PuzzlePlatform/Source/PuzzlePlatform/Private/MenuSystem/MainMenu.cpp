@@ -3,9 +3,18 @@
 #include "PuzzlePlatform/Public/MenuSystem/MainMenu.h"
 
 #include "Components/Button.h"
-#include "Components/EditableTextBox.h"
 #include "Components/WidgetSwitcher.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "MenuSystem/ServerRow.h"
+#include "UObject/ConstructorHelpers.h"
+
+UMainMenu::UMainMenu(const FObjectInitializer& ObjectInitializer)
+{
+	const ConstructorHelpers::FClassFinder<UUserWidget> ServerRowBPClass(TEXT("/Game/MenuSystem/WBP_ServerRow"));
+	if (!ensure(ServerRowBPClass.Class != nullptr)) return;
+
+	ServerRowClass = ServerRowBPClass.Class;
+}
 
 bool UMainMenu::Initialize()
 {
@@ -26,12 +35,10 @@ bool UMainMenu::Initialize()
 
 	if (!ensure(QuitButton != nullptr)) return false;
 	QuitButton->OnClicked.AddDynamic(this, &UMainMenu::QuitGame);
-	
+
 
 	return true;
 }
-
-
 
 
 void UMainMenu::HostServer()
@@ -44,11 +51,19 @@ void UMainMenu::HostServer()
 
 void UMainMenu::JoinServer()
 {
-	if(MenuInterface != nullptr)
+	// if(MenuInterface != nullptr)
+	// {
+	// 	if (!ensure(IPAddressField != nullptr)) return;
+	// 	const FString Address = IPAddressField->GetText().ToString();
+	// 	MenuInterface->Join(Address);
+	// }
+
+	UWorld* World = this->GetWorld();
+	if (World != nullptr)
 	{
-		if (!ensure(IPAddressField != nullptr)) return;
-		const FString Address = IPAddressField->GetText().ToString();
-		MenuInterface->Join(Address);
+		UServerRow* ServerRow = CreateWidget<UServerRow>(World, ServerRowClass);
+		if (!ensure(ServerRow != nullptr)) return;
+		ServerList->AddChild(ServerRow);
 	}
 }
 
