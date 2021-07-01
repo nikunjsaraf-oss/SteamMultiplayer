@@ -6,6 +6,7 @@
 
 #include "Engine/GameInstance.h"
 #include "MenuSystem/MenuInterface.h"
+#include "OnlineSubsystem.h"
 
 #include "PuzzlePlatformGameInstance.generated.h"
 
@@ -40,4 +41,7 @@ public:
 private:
 	TSubclassOf<class UUserWidget> MenuClass;
 	TSubclassOf<class UUserWidget> PauseMenuClass;
+
+	IOnlineSessionPtr SessionInterface;
+	void OnCreateSessionComplete(FName SessionName, bool bSuccess);
 };

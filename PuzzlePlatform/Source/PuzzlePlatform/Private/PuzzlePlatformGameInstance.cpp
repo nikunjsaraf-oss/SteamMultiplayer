@@ -2,7 +2,8 @@
 
 #include "PuzzlePlatform/Public/PuzzlePlatformGameInstance.h"
 
-#include "OnlineSubsystem.h"
+#include "OnlineSessionSettings.h"
+#include "Interfaces/OnlineSessionInterface.h"
 #include "Blueprint/UserWidget.h"
 #include "Engine/Engine.h"
 #include "GameFramework/Character.h"
@@ -25,13 +26,14 @@ UPuzzlePlatformGameInstance::UPuzzlePlatformGameInstance(const FObjectInitialize
 void UPuzzlePlatformGameInstance::Init()
 {
 	IOnlineSubsystem* Subsystem = IOnlineSubsystem::Get();
-	if(Subsystem != nullptr)
+	if (Subsystem != nullptr)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Found Subsystem %s"), *Subsystem->GetSubsystemName().ToString());
-		const IOnlineSessionPtr SessionInterface = Subsystem->GetSessionInterface();
-		if(SessionInterface.IsValid())
+		SessionInterface = Subsystem->GetSessionInterface();
+		if (SessionInterface.IsValid())
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Found SessionInterface"));
+			SessionInterface->OnCreateSessionCompleteDelegates.AddUObject(
+				this, &UPuzzlePlatformGameInstance::OnCreateSessionComplete);
 		}
 	}
 	else
@@ -64,8 +66,13 @@ void UPuzzlePlatformGameInstance::LoadPauseMenu()
 	PauseGame->SetMenuInterface(this);
 }
 
-void UPuzzlePlatformGameInstance::Host()
+void UPuzzlePlatformGameInstance::OnCreateSessionComplete(FName SessionName, bool bSuccess)
 {
+	if(!bSuccess)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Unable to create Session"));
+		return;
+	}
 	UEngine* Engine = GetEngine();
 	if (!ensure(Engine != nullptr)) return;
 
@@ -75,6 +82,16 @@ void UPuzzlePlatformGameInstance::Host()
 	if (!ensure(World != nullptr)) return;
 
 	World->ServerTravel("/Game/ThirdPersonCPP/Maps/ThirdPersonExampleMap?listen");
+}
+
+
+void UPuzzlePlatformGameInstance::Host()
+{
+	if (SessionInterface.IsValid())
+	{
+		const FOnlineSessionSettings OnlineSessionSettings;
+		SessionInterface->CreateSession(0, TEXT("Session - 1"), OnlineSessionSettings);
+	}
 }
 
 void UPuzzlePlatformGameInstance::Join(const FString& Address)
@@ -94,7 +111,7 @@ void UPuzzlePlatformGameInstance::LoadMainMenu()
 	UEngine* Engine = GetEngine();
 	if (!ensure(Engine != nullptr)) return;
 	Engine->AddOnScreenDebugMessage(0, 10, FColor::Green, TEXT("Leaving...."));
-	
+
 	APlayerController* PlayerController = GetFirstLocalPlayerController();
 	if (!ensure(PlayerController != nullptr)) return;
 
