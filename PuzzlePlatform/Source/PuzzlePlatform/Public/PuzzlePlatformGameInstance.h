@@ -43,9 +43,13 @@ private:
 	TSubclassOf<class UUserWidget> PauseMenuClass;
 
 	IOnlineSessionPtr SessionInterface;
+
+	TSharedPtr<class FOnlineSessionSearch> SessionSearch;
 	
 	void OnCreateSessionComplete(FName SessionName, bool bSuccess);
 	void OnDestroySessionComplete(FName SessionName, bool bSuccess) const;
 
 	void CreateSession() const;
+
+	void OnFindSessionsComplete(bool bSuccess);
 };
