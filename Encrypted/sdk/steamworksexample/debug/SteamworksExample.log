@@ -1,0 +1,41 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(39,5): warning MSB4211: The property "IntermediateOutputPath" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets (38,5)".
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.BuildSteps.Targets(30,5): warning MSB4211: The property "DebugType" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.BuildSteps.Targets (29,5)".
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets(372,5): warning MSB4211: The property "CleanFile" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets (38,5)".
+cl : command line warning D9035: option 'Gm' has been deprecated and will be removed in a future release
+  voicechat.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\xaudio2.h(20,1): fatal error C1189: #error:  "This version of XAudio2 is available only in Windows 8 or later. Use the XAudio2 headers and libraries from the DirectX SDK with applications that target Windows 7 and earlier versions."
+  stdafx.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\xaudio2.h(20,1): fatal error C1189: #error:  "This version of XAudio2 is available only in Windows 8 or later. Use the XAudio2 headers and libraries from the DirectX SDK with applications that target Windows 7 and earlier versions."
+  p2pauth.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\xaudio2.h(20,1): fatal error C1189: #error:  "This version of XAudio2 is available only in Windows 8 or later. Use the XAudio2 headers and libraries from the DirectX SDK with applications that target Windows 7 and earlier versions."
+  musicplayer.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\xaudio2.h(20,1): fatal error C1189: #error:  "This version of XAudio2 is available only in Windows 8 or later. Use the XAudio2 headers and libraries from the DirectX SDK with applications that target Windows 7 and earlier versions."
+  htmlsurface.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\xaudio2.h(20,1): fatal error C1189: #error:  "This version of XAudio2 is available only in Windows 8 or later. Use the XAudio2 headers and libraries from the DirectX SDK with applications that target Windows 7 and earlier versions."
+  gameenginewin32.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\xaudio2.h(20,1): fatal error C1189: #error:  "This version of XAudio2 is available only in Windows 8 or later. Use the XAudio2 headers and libraries from the DirectX SDK with applications that target Windows 7 and earlier versions."
+  connectingmenu.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\xaudio2.h(20,1): fatal error C1189: #error:  "This version of XAudio2 is available only in Windows 8 or later. Use the XAudio2 headers and libraries from the DirectX SDK with applications that target Windows 7 and earlier versions."
+  clanchatroom.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\xaudio2.h(20,1): fatal error C1189: #error:  "This version of XAudio2 is available only in Windows 8 or later. Use the XAudio2 headers and libraries from the DirectX SDK with applications that target Windows 7 and earlier versions."
+  VectorEntity.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\xaudio2.h(20,1): fatal error C1189: #error:  "This version of XAudio2 is available only in Windows 8 or later. Use the XAudio2 headers and libraries from the DirectX SDK with applications that target Windows 7 and earlier versions."
+  Sun.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\xaudio2.h(20,1): fatal error C1189: #error:  "This version of XAudio2 is available only in Windows 8 or later. Use the XAudio2 headers and libraries from the DirectX SDK with applications that target Windows 7 and earlier versions."
+  StatsAndAchievements.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\xaudio2.h(20,1): fatal error C1189: #error:  "This version of XAudio2 is available only in Windows 8 or later. Use the XAudio2 headers and libraries from the DirectX SDK with applications that target Windows 7 and earlier versions."
+  StarField.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\xaudio2.h(20,1): fatal error C1189: #error:  "This version of XAudio2 is available only in Windows 8 or later. Use the XAudio2 headers and libraries from the DirectX SDK with applications that target Windows 7 and earlier versions."
+  SpaceWarServer.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\xaudio2.h(20,1): fatal error C1189: #error:  "This version of XAudio2 is available only in Windows 8 or later. Use the XAudio2 headers and libraries from the DirectX SDK with applications that target Windows 7 and earlier versions."
+  SpaceWarEntity.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\xaudio2.h(20,1): fatal error C1189: #error:  "This version of XAudio2 is available only in Windows 8 or later. Use the XAudio2 headers and libraries from the DirectX SDK with applications that target Windows 7 and earlier versions."
+  SpaceWarClient.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\xaudio2.h(20,1): fatal error C1189: #error:  "This version of XAudio2 is available only in Windows 8 or later. Use the XAudio2 headers and libraries from the DirectX SDK with applications that target Windows 7 and earlier versions."
+  Ship.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\xaudio2.h(20,1): fatal error C1189: #error:  "This version of XAudio2 is available only in Windows 8 or later. Use the XAudio2 headers and libraries from the DirectX SDK with applications that target Windows 7 and earlier versions."
+  ServerBrowser.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\xaudio2.h(20,1): fatal error C1189: #error:  "This version of XAudio2 is available only in Windows 8 or later. Use the XAudio2 headers and libraries from the DirectX SDK with applications that target Windows 7 and earlier versions."
+  RemoteStorage.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\xaudio2.h(20,1): fatal error C1189: #error:  "This version of XAudio2 is available only in Windows 8 or later. Use the XAudio2 headers and libraries from the DirectX SDK with applications that target Windows 7 and earlier versions."
+  RemotePlay.cpp
