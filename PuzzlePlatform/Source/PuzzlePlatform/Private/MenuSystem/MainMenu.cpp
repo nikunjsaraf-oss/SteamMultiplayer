@@ -3,6 +3,7 @@
 #include "PuzzlePlatform/Public/MenuSystem/MainMenu.h"
 
 #include "Components/Button.h"
+#include "Components/TextBlock.h"
 #include "Components/WidgetSwitcher.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "MenuSystem/ServerRow.h"
@@ -51,27 +52,40 @@ void UMainMenu::HostServer()
 
 void UMainMenu::JoinServer()
 {
-	// if(MenuInterface != nullptr)
-	// {
-	// 	if (!ensure(IPAddressField != nullptr)) return;
-	// 	const FString Address = IPAddressField->GetText().ToString();
-	// 	MenuInterface->Join(Address);
-	// }
+	if (MenuInterface != nullptr)
+	{
+		// if (!ensure(IPAddressField != nullptr)) return;
+		// const FString Address = IPAddressField->GetText().ToString();
+		MenuInterface->Join("");
+	}
+}
 
+void UMainMenu::SetServerList(TArray<FString> ServerNames)
+{
 	UWorld* World = this->GetWorld();
-	if (World != nullptr)
+	if(!World) return;
+
+	ServerList->ClearChildren();
+	
+	for(const FString& ServerName : ServerNames)
 	{
 		UServerRow* ServerRow = CreateWidget<UServerRow>(World, ServerRowClass);
 		if (!ensure(ServerRow != nullptr)) return;
+		ServerRow->ServerName->SetText(FText::FromString(ServerName));
 		ServerList->AddChild(ServerRow);
 	}
 }
+
 
 void UMainMenu::OpenJoinMenu()
 {
 	if (!ensure(MenuSwitcher != nullptr)) return;
 	if (!ensure(JoinMenu != nullptr)) return;
 	MenuSwitcher->SetActiveWidget(JoinMenu);
+	if(MenuInterface)
+	{
+		MenuInterface->RefreshServerList();
+	}
 }
 
 void UMainMenu::QuitGame()

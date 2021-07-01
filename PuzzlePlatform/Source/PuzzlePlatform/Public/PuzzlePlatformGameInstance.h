@@ -38,9 +38,14 @@ public:
 	UFUNCTION(Exec)
 	virtual void LoadMainMenu() override;
 
+	virtual void RefreshServerList() override;
+
 private:
 	TSubclassOf<class UUserWidget> MenuClass;
 	TSubclassOf<class UUserWidget> PauseMenuClass;
+
+	UPROPERTY()
+	class UMainMenu* Menu;
 
 	IOnlineSessionPtr SessionInterface;
 
