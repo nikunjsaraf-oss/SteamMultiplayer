@@ -50,8 +50,44 @@ void UMainMenu::HostServer()
 	}
 }
 
+void UMainMenu::SetServerList(TArray<FString> ServerNames)
+{
+	UWorld* World = this->GetWorld();
+	if(!World) return;
+
+	ServerList->ClearChildren();
+
+	// To store number of servers present in the game.
+	uint32 i = 0;
+	
+	for(const FString& ServerName : ServerNames)
+	{
+		UServerRow* ServerRow = CreateWidget<UServerRow>(World, ServerRowClass);
+		if (!ensure(ServerRow != nullptr)) return;
+		ServerRow->ServerName->SetText(FText::FromString(ServerName));
+		ServerRow->Setup(this, i);
+		++i;
+		
+		ServerList->AddChild(ServerRow);
+	}
+}
+
+void UMainMenu::SelectIndex(uint32 Index)
+{
+	SelectedIndex = Index;
+}
+
+
 void UMainMenu::JoinServer()
 {
+	if(SelectedIndex.IsSet())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Selected index is: %d"), SelectedIndex.GetValue());
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Selected index not set"));
+	}
 	if (MenuInterface != nullptr)
 	{
 		// if (!ensure(IPAddressField != nullptr)) return;
@@ -60,21 +96,7 @@ void UMainMenu::JoinServer()
 	}
 }
 
-void UMainMenu::SetServerList(TArray<FString> ServerNames)
-{
-	UWorld* World = this->GetWorld();
-	if(!World) return;
 
-	ServerList->ClearChildren();
-	
-	for(const FString& ServerName : ServerNames)
-	{
-		UServerRow* ServerRow = CreateWidget<UServerRow>(World, ServerRowClass);
-		if (!ensure(ServerRow != nullptr)) return;
-		ServerRow->ServerName->SetText(FText::FromString(ServerName));
-		ServerList->AddChild(ServerRow);
-	}
-}
 
 
 void UMainMenu::OpenJoinMenu()
