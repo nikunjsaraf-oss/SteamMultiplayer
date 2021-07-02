@@ -153,11 +153,6 @@ void UPuzzlePlatformGameInstance::Join(uint32 Index)
 
 	SessionInterface->JoinSession(0, GSession_Name, SessionSearch->SearchResults[Index]);
 
-
-	// if (Menu)
-	// {
-	// 	Menu->Teardown();
-	// }
 }
 
 void UPuzzlePlatformGameInstance::OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result)
