@@ -5,6 +5,7 @@
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
 #include "Components/WidgetSwitcher.h"
+#include "Engine/Engine.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "MenuSystem/ServerRow.h"
 #include "UObject/ConstructorHelpers.h"
@@ -80,19 +81,16 @@ void UMainMenu::SelectIndex(uint32 Index)
 
 void UMainMenu::JoinServer()
 {
-	if(SelectedIndex.IsSet())
+	if(SelectedIndex.IsSet() && MenuInterface != nullptr)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Selected index is: %d"), SelectedIndex.GetValue());
+		MenuInterface->Join(SelectedIndex.GetValue());
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Selected index not set"));
-	}
-	if (MenuInterface != nullptr)
-	{
-		// if (!ensure(IPAddressField != nullptr)) return;
-		// const FString Address = IPAddressField->GetText().ToString();
-		MenuInterface->Join("");
+		UEngine* Engine = GetGameInstance()->GetEngine();
+		if (!ensure(Engine != nullptr)) return;
+		Engine->AddOnScreenDebugMessage(0, 1, FColor::Red, TEXT("No server is selected"));
 	}
 }
 
